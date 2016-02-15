@@ -35,7 +35,7 @@ public class ConverteMoedaActivity extends AppCompatActivity {
                 //linha (view)
                 R.id.linha_texto,
                 //dados (model)
-                new String[]{"primeiro registro", "segundo registro", "terceiro registro", mKey}
+                new String[]{"primeiro registro", "segundo registro", "terceiro registro", mKey, "quarto registro"}
 
         );
         mListView.setAdapter(arrayAdapter);

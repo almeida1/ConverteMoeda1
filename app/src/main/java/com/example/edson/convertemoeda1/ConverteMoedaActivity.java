@@ -1,6 +1,9 @@
 package com.example.edson.convertemoeda1;
 
+import android.content.Context;
 import android.content.res.AssetManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,7 +38,7 @@ public class ConverteMoedaActivity extends AppCompatActivity {
                 //linha (view)
                 R.id.linha_texto,
                 //dados (model)
-                new String[]{"primeiro registro", "segundo registro", "terceiro registro", mKey, "quarto registro"}
+                new String[]{"primeiro registro", "segundo registro", "terceiro registro", mKey, "outro registro"}
 
         );
         mListView.setAdapter(arrayAdapter);
@@ -86,5 +89,14 @@ public class ConverteMoedaActivity extends AppCompatActivity {
         }
         return  properties.getProperty(keyName);
 
+    }
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 }

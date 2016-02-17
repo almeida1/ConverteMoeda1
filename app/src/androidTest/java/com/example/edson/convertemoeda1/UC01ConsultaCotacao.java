@@ -21,6 +21,7 @@ public class UC01ConsultaCotacao extends ActivityInstrumentationTestCase2<Conver
     }
     public void testCT01UC01CarregaMoedas_valida_chave_de_desenvolvedor() throws Exception, Throwable {
         assertEquals("f0ec339528da40cbb7836d39b8643cbb", mKey);
+
     }
     public void testCT02UC01CarregaMoedas_verifica_conexao_com_a_rede() throws Exception, Throwable {
         assertTrue(mActivity.isOnline());

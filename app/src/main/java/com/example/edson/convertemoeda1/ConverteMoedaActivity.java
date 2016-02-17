@@ -15,7 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -41,11 +43,12 @@ public class ConverteMoedaActivity extends AppCompatActivity {
                 //linha (view)
                 R.id.linha_texto,
                 //dados (model)
-                new String[]{"primeiro registro", "segundo registro", "terceiro registro", mKey, "outro registro","CLASSE IMPLEMENTADA"}
+                new String[]{"primeiro registro", "segundo registro", "terceiro registro", mKey,
+                        "outro registro","Obtem codigo das moedas"}
 
         );
         mListView.setAdapter(arrayAdapter);
-
+        new ObtemCodigoDasMoedas().execute(URL_CODES);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -108,5 +111,17 @@ public class ConverteMoedaActivity extends AppCompatActivity {
         protected JSONObject doInBackground(String... params) {
             return new JSONParser().getJSONFromUrl(URL_CODES);
         }
-    }
+        @Override
+        protected void onPostExecute(JSONObject jsonObject){
+            try {
+                if (jsonObject == null) {
+                    throw new JSONException("dados nao disponiveis");
+                }
+            }
+                catch (JSONException e){
+                    Toast.makeText(ConverteMoedaActivity.this, "execeção do JSON " + e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+                }
+            }
+        }
 }

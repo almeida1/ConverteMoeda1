@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -22,7 +25,7 @@ import java.util.Properties;
 public class ConverteMoedaActivity extends AppCompatActivity {
     private ListView mListView;
     private String mKey;
-
+    public static final String URL_CODES = "http://openexchangerates.org/api/currencies.json";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,7 @@ public class ConverteMoedaActivity extends AppCompatActivity {
                 //linha (view)
                 R.id.linha_texto,
                 //dados (model)
-                new String[]{"primeiro registro", "segundo registro", "terceiro registro", mKey, "outro registro"}
+                new String[]{"primeiro registro", "segundo registro", "terceiro registro", mKey, "outro registro","CLASSE IMPLEMENTADA"}
 
         );
         mListView.setAdapter(arrayAdapter);
@@ -98,5 +101,12 @@ public class ConverteMoedaActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+    private class ObtemCodigoDasMoedas extends AsyncTask<String, Void, JSONObject>{
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            return new JSONParser().getJSONFromUrl(URL_CODES);
+        }
     }
 }
